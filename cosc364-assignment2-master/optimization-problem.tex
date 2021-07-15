@@ -1,0 +1,52 @@
+%! Author = levanin
+%! Date = 25/05/20
+
+% Preamble
+\documentclass[11pt]{article}
+
+% Packages
+\usepackage{amsmath}
+
+% Document
+\begin{document}
+    \title{Problem Formulation}
+    \maketitle
+
+    \paragraph{}
+    \noindent
+    The problem given can be formulated as below, where $x_{ijk}$ represents the volume sent from source i, through transit
+    node j, to destination k. $u_{ijk}$ represents the binary decision variable whether or not a particular path from
+    $i \rightarrow j \rightarrow k$ is utilised. Note for each source to each destination, we must use 2 equally
+    split paths, and the volume is $i+j$, so for each path, the expression $x_{ijk} = \frac{u_{ijk}.(i+j)}{2}$ holds. Since we
+    need only balance loads on the transit nodes, this can now give rise to a Linear Programmable (LP) problem. In addition,
+    we do not actually care about individual link costs as our solutions for $x_{ijk}$ give rise to our values for link costs.
+    More on this later. \\
+    
+    \par
+    \noindent
+    So, we have: \newline
+    Minimise $r$ \newline \newline
+    Subject to: \newline \newline
+    Demand Flow $ij$:
+        \[\sum_{j=1}^{b}  \mathcal{X}_{ijk} =  i + k \quad \forall  i, j\] 
+    \newline
+    Used Paths: \newline
+        \[\sum_{j=1}^{b} \mathcal{U}_{ijk} = 2\quad \forall i,j \]
+    \newline
+    Path Cost \( ij \): \newline
+        \[ \mathcal{X}_{ijk} = \frac{\mathcal{U}_{ijk}(i + j)}{2}\]
+    \newline
+    Constraint Equation: \newline
+        \[\sum_{i=1, k=1}^{a, c} \mathcal{X}_{ijk} \leq r \quad \forall k\]
+    \newline
+    Link Cost $C$:\newline
+        \[\sum_{k=1}^{c}\mathcal{X}_{ikj} = \mathcal{C}_{ik} \quad \forall i,k\]
+    \newline
+    Link Cost $D$:\newline
+        \[\sum_{i=1}^{d}\mathcal{X}_{ijk} = d_{jk} \quad \forall j,k\]
+    \newline
+    Bounds: \newline
+        \[\mathcal{X}_{ikj} \geq 0 \quad \forall i,k,j\]\newline
+        \[\mathcal{U}_{ikj} \in \{0,1\} \quad \forall i,k,j\] \newline
+        
+\end{document}
